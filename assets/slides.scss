@@ -30,6 +30,18 @@ $code-block-border-color: #fff;
     padding-top: 5em;
 }
 
+.reveal .subtitle {
+    padding-top: 1.5em;
+}
+
+.reveal .quarto-title-author-name {
+    padding-top: 2em;
+}
+
+.reveal .quarto-title-affiliation {
+    padding-top: 1.5em;
+}
+
 // cursor
 .cursor-dot,.cursor-dot-outline{
     pointer-events:none;
