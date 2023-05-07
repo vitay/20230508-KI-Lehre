@@ -1,35 +1,9 @@
-# Presentation template using Quarto
+# AI and CHatGPT
 
-Basic structure to create simple HTML presentations using Quarto, based on Pandoc's markdown and reveal.js. 
+Presentation held at the TUCtech. Diskurs KI in der Hochschullehre der TU Chemnitz on 08.05.2023.
 
-Check the doc at <https://quarto.org/> and simply install Quarto.
+Link: <https://julien-vitay.net/20230508-KI-Lehre>
 
-The `docs/` filter can be directly used by Github Pages. Example:
-
-<https://julien-vitay.net/quarto-presentation>
-
-## Installation
-
-```bash
-git clone https://github.com/vitay/quarto-presentation.git
-```
-
-A useful extension allows to embed youtube videos directly:
-
-```bash
-cd slides
-quarto install extension sellorm/quarto-youtube-embed
-```
-
-## Usage
-
-Using quarto is a one-liner (`quarto render slides --to revealjs`), but the provided Makefile makes it even easier:
-
-```
-make
-```
-
-The resulting presentation is in `docs/index.html`, which can be used directly with Github Pages.
 
 ## Shortcuts
 
