@@ -1,0 +1,196 @@
+Methods from the field of Artificial Intelligence (AI), especially artificial neural networks (**deep learning**), have revolutionized many technological fields in the last decade:
+
+* Computer Vision (object recognition, detection, segmentation...)
+* Natural Language Processing (translation, text generation, understanding...)
+* Control (robotics, video games, Go...)
+
+The latest generation of **generative models** (Dall-E, Midjourney, ChatGPT) is able to generate an impressive variety of data (images, text, music, source code) and has become available to the general public. 
+
+The availability of large generative models creates many problems of trustworthiness, ethics, copyright infringements, etc, especially in the context of teaching.
+
+
+ChatGPT uses the three main forms of machine learning: supervised, unsupervised and reinforcement learning. It is therefore a good excuse to understand AI methods.
+
+One approach to **natural language processing** (NLP) is to use grammatical rules and logical operators to parse sentences and hierarchically assign each word a function.
+
+* Pros: 
+    * allows to understand language.
+    * benefits from human knowledge.
+    * used for compilers.
+
+* Cons: 
+    * does not really work...
+
+The second main approach to NLP is to split a corpus into **n-grams**, i.e. sequences of $n$ consecutive words, and compute conditional probabilities:
+
+What is the probability of the next word, given the last $n-1$ words were these?
+
+Bigrams are for example easy to learn in a big $N\times N$ matrix to predict the next word.
+
+For each pair of consecutive words, just count the number of occurences in the corpus and normalize:
+
+The most likely next word(s) can be **sampled** and proposed for autosuggestion:
+
+They can also be used in an **autoregressive** manner, by using the predicted word as the next input:
+
+> The students opened their $\rightarrow$ books
+>
+> students opened their books $\rightarrow$ and
+>
+> opened their books and $\rightarrow$ started
+>
+> ...
+
+Here is a random sentence generated from a Jane Austen trigram:
+
+> “You are uniformly charming!” cried he, with a smile of associating and now and then I bowed and they perceived a chaise and four to wish for.
+
+Pros:
+
+* Very easy to build: just collect a huge corpus of text (books, wikipedia, internet) and create the n-gram matrix.
+
+* Fast to use: only requires sampling.
+
+* Statistical model: can stochastically generate different texts depending on sampling.
+
+Cons:
+
+* Does not understand anything about the grammar / structure of the language, purely statistical.
+
+* Does not scale with $n$: the association matrix would be mostly empty.
+
+* If $n$ is small, there is little context to predict the next word. The generated text is meaningless.
+
+Can't we build a statistical model of language that scales with $n$? Yes, with neural networks!
+
+
+
+
+
+
+
+
+
+All we need is a **parameterized model** that takes $n-1$ word representations as an input and outputs the probability of the next word.
+
+The model should learn from n-grams found in the data (**supervised learning**).
+
+One-hot encoded vectors representing words can be built knowing the total number of words in the vocabulary (e.g. 25.000).
+
+
+
+
+Artificial neural networks (aka deep networks) are parameterized models that hierarchically transform vectors into others, through a sequence of matrix-vector multiplications and non-linear activations functions. 
+
+The backpropagation algorithm is used to iteratively adapt the weight matrices so that the network minimizes a given loss function on the training set.
+
+The deeper the network, the more complex I/O relationships it can learn.
+
+Different layer types can be used inside a deep network. Convolutions and max-pooling layers are especially efficient when processing images. 
+
+The pixels of an image are used as input to the network.
+The output is a vector of 1000 probabilities corresponding to different classes.
+
+When trained on the ImageNet dataset (14 million images), CNNs achieve super-human performance in object recognition.
+
+Supervised learning is basically a solved problem using deep neural networks.
+
+Most major problems in computer vision, speech processing / generation have been solved by CNNs.
+
+All you need is:
+
+1. A big enough neural network (dozens of layers)
+2. Tons of annotated data (millions of examples)
+3. A lot of computer power (dozens of high-end GPUs) for a very long training time (weeks)
+4. Money 
+
+The main problem (for big players like Google, Facebook or OpenAI) is **data annotation**, which has to be done by humans.
+The focus has shifted since a few years to **self-supervised learning**.
+
+**Self-supervised learning** (SSL) is the ability to learn something useful from raw data without human annotation.
+
+The most common approach is to remove some part of existing data and learn to predict it. By doing so, one learns good representations that can be reused.
+
+> Predict the future given the past.
+
+Next-word prediction is a good example of SSL: the next word already present in the raw data and can be used as the ground truth to train a neural network.
+
+Convolutional neural networks (and recurrent neural networks) have now been replaced by the **Transformer** architecture [@Vaswani2017].
+
+It is a regular neural network trained using supervised learning, but with a new operation called **self-attention**.
+
+The original Transformer allowed to translate text in an autoregressive manner (word by word).
+
+![Source: <http://jalammar.github.io/illustrated-transformer/>](img/transformer_decoding_2.gif)
+
+The main advantage of the self-attention operation is that it allows to learn context-dependent representations of the words regardless the length of the sentence:
+
+Multiple attention heads allow to learn different contexts for each word.
+
+Key property: it becomes possible to predict the next word in complete paragraphs / chapters: the only limitation is the computational power!
+
+
+GPT-3 is a **Large Language Model** (LLM) from OpenAI, trained to predict the next word (actually token) from a huge text corpus.
+
+45 TB of text from Wikipedia, Books, Common Crawl (internet), Webtext2 (Reddit).
+
+It is a subpart of the transformer (decoder), but scaled up: 175B parameters, 96 layers, 96 attention heads, vectors of size 12288...
+
+GPT-3 has been trained to predict the next word on a huge database. 
+
+Due to its stochastic nature, the produced texts are always different: LLMs are **stochastic parrots** [@Bender2021].
+
+It presumably took OpenAI 34 days to train GPT-3 on 1024 A100 GPUs (10 k$ each, 5 M$ of electricity). It would take 355 years to train GPT-3 on a single V100 GPU.
+
+GPT-3 can only repeat what it has been trained on. It is not suitable for anything else, such as conversations, question answering or software development, as it is not in the training data
+
+GPT-3 can be **fine-tuned** with supervised learning using **input prompts** and expected outputs.
+
+For ChatGPT, GPT-3 was fine-tuned using 13,000 input / output samples written by 40 experts (GPT-3.5).
+
+
+In RL, the correct answer is not provided. A scalar reward simply signals how good the output is.
+
+The model has to learn how to maximize rewards on the long-term by producing the best action (output) in the given state (input).
+
+Given the right loss function, a deep neural network can be trained by **trial-and-error** to maximize the rewards. 
+
+Many algorithms exist: DQN, A3C, DDPG, PPO, PlaNet, Dreamer, MuZero...
+
+The main problem is the **reward model**: when is the output good or bad?
+
+AlphaGo [@Silver2016] was able to beat Lee Sedol in 2016, 19 times World champion.
+
+It relies on human knowledge to **bootstrap** a RL agent (supervised learning).
+
+The RL agent discovers new strategies by using self-play: during the games against Lee Sedol, it was able to use **novel** moves which were never played before and surprised its opponent.
+
+Training took several weeks on 1202 CPUs and 176 GPUs.
+
+
+A reward model (RM) can be trained in a supervised manner to predict the score that human annotators would give to a proposed response.
+
+Human annotation was very cumbersome. Not only did they have to rank answers, but also report NSFW content leaked from reddit.
+
+Using the reward model (PPO), GPT can be fine-tuned to only produce good answers.
+
+ChatGPT can only produce text that was in its training data (SSL until 2021, SL or RL), although in a stochastic manner.
+
+Its training objectives were:
+
+1. SSL: Predict the next word of the sentence.
+2. SL: Answer the questions.
+3. RL: Please the human annotators.
+
+The RLHF alignment approach and the use of hidden prompts explain the behavior of the chatbot: friendliness, political correctness, satisfying the user.
+
+Telling the truth was not an objective. ChatGPT does not lie, but tells whatever will please the user:
+
+> ChatGPT: Automatic expensive BS generator at scale
+>
+> Colin Fraser
+
+A plugin allowing ChatGPT to access Internet was recently published. 
+
+The behavior / personality of the chatbot is governed by a hidden prompt at the start of a conversation. 
+

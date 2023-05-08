@@ -1,0 +1,177 @@
+Methoden aus dem Bereich der künstlichen Intelligenz (KI), insbesondere künstliche neuronale Netze (**deep learning**), haben im letzten Jahrzehnt viele technologische Bereiche revolutioniert:
+
+* Computer Vision (Objekterkennung, -detektion, -segmentierung...)
+* Natürliche Sprachverarbeitung (Übersetzung, Texterzeugung, Verständnis...)
+* Steuerung (Robotik, Videospiele, Go...)
+
+Die neueste Generation **generativer Modelle** (Dall-E, Midjourney, ChatGPT) ist in der Lage, eine beeindruckende Vielfalt von Daten (Bilder, Text, Musik, Quellcode) zu generieren und ist inzwischen für die breite Öffentlichkeit zugänglich. 
+
+Die Verfügbarkeit großer generativer Modelle wirft viele Probleme in Bezug auf Vertrauenswürdigkeit, Ethik, Urheberrechtsverletzungen usw. auf, insbesondere im Zusammenhang mit dem Unterricht.
+
+
+ChatGPT verwendet die drei Hauptformen des maschinellen Lernens: überwachtes, unüberwachtes und verstärkendes Lernen. Es ist daher eine gute Ausrede, um KI-Methoden zu verstehen.
+
+Ein Ansatz zur **natürlichen Sprachverarbeitung** (NLP) besteht darin, grammatikalische Regeln und logische Operatoren zu verwenden, um Sätze zu analysieren und jedem Wort hierarchisch eine Funktion zuzuweisen.
+
+* Vorteile: 
+    * ermöglicht es, Sprache zu verstehen.
+    * profitiert von menschlichem Wissen.
+    * wird für Compiler verwendet.
+
+* Nachteile: 
+    * Funktioniert nicht wirklich...
+
+Der zweite wichtige NLP-Ansatz besteht darin, einen Korpus in **n-Gramme** zu zerlegen, d. h. in Sequenzen von $n$ aufeinanderfolgenden Wörtern, und bedingte Wahrscheinlichkeiten zu berechnen:
+
+Wie hoch ist die Wahrscheinlichkeit des nächsten Wortes, wenn die letzten $n-1$ Wörter diese waren?
+
+Bigramme lassen sich zum Beispiel leicht in einer großen $N\mal N$-Matrix lernen, um das nächste Wort vorherzusagen.
+
+Für jedes Paar von aufeinanderfolgenden Wörtern wird einfach die Anzahl der Vorkommen im Korpus gezählt und normalisiert:
+
+Die wahrscheinlichsten nächsten Wörter können **ausgewählt** und zur Autosuggestion vorgeschlagen werden:
+
+Sie können auch auf **autoregressive** Weise verwendet werden, indem das vorhergesagte Wort als nächste Eingabe verwendet wird:
+
+> Die Schüler öffneten ihre Bücher
+>
+> Die Schüler öffneten ihre Bücher $\rightarrow$ und
+>
+> öffneten ihre Bücher und $\rightarrow$ begann
+>
+> ...
+
+Hier ist ein zufälliger Satz, der aus einem Jane Austen Trigramm generiert wurde:
+
+> "Sie sind gleichmäßig charmant!" rief er, mit einem Lächeln der Assoziation und hin und wieder verbeugte ich mich und sie sahen eine Chaise und vier zu wünschen.
+
+Vorteile:
+
+* Sehr einfach zu erstellen: Sammeln Sie einfach einen großen Textkorpus (Bücher, Wikipedia, Internet) und erstellen Sie die n-Gramm-Matrix.
+
+* Schnell zu benutzen: erfordert nur Stichproben.
+
+* Statistisches Modell: kann stochastisch verschiedene Texte je nach Stichprobe generieren.
+
+Nachteile:
+
+* Versteht nichts von der Grammatik/Struktur der Sprache, rein statistisch.
+
+* Skaliert nicht mit $n$: die Assoziationsmatrix wäre meist leer.
+
+* Wenn $n$ klein ist, gibt es wenig Kontext, um das nächste Wort vorherzusagen. Der generierte Text ist bedeutungslos.
+
+Können wir nicht ein statistisches Modell der Sprache erstellen, das mit $n$ skaliert? Ja, mit neuronalen Netzen!
+
+
+
+
+Künstliche neuronale Netze (auch tiefe Netze genannt) sind parametrisierte Modelle, die Vektoren durch eine Abfolge von Matrix-Vektor-Multiplikationen und nichtlinearen Aktivierungsfunktionen hierarchisch in andere transformieren. 
+
+Der Backpropagation-Algorithmus wird verwendet, um die Gewichtsmatrizen iterativ so anzupassen, dass das Netz eine bestimmte Verlustfunktion auf der Trainingsmenge minimiert.
+
+Je tiefer das Netz ist, desto komplexere E/A-Beziehungen kann es lernen.
+
+In einem tiefen Netz können verschiedene Schichttypen verwendet werden. Faltungsschichten und Max-Pooling-Schichten sind besonders effizient bei der Verarbeitung von Bildern. 
+
+Die Pixel eines Bildes werden als Eingabe für das Netz verwendet.
+Die Ausgabe ist ein Vektor mit 1000 Wahrscheinlichkeiten, die den verschiedenen Klassen entsprechen.
+
+Wenn CNNs auf dem ImageNet-Datensatz (14 Millionen Bilder) trainiert werden, erreichen sie übermenschliche Leistungen bei der Objekterkennung.
+
+Überwachtes Lernen ist im Grunde ein gelöstes Problem, das mit tiefen neuronalen Netzen gelöst werden kann.
+
+Die meisten wichtigen Probleme in den Bereichen Computer Vision und Sprachverarbeitung/-erzeugung wurden mit CNNs gelöst.
+
+Alles was Sie brauchen ist:
+
+1. Ein ausreichend großes neuronales Netz (Dutzende von Schichten)
+2. Tonnen von annotierten Daten (Millionen von Beispielen)
+3. Eine Menge Computerleistung (Dutzende von High-End-GPUs) für eine sehr lange Trainingszeit (Wochen)
+4. Geld 
+
+Das Hauptproblem (für große Unternehmen wie Google, Facebook oder OpenAI) ist die **Datenannotation**, die von Menschen vorgenommen werden muss.
+Seit ein paar Jahren hat sich der Schwerpunkt auf **selbstüberwachtes Lernen** verlagert.
+
+**Selbstüberwachtes Lernen** (SSL) ist die Fähigkeit, aus Rohdaten etwas Nützliches zu lernen, ohne dass diese von Menschen annotiert werden.
+
+Der gängigste Ansatz besteht darin, einen Teil der vorhandenen Daten zu entfernen und zu lernen, diese vorherzusagen. Auf diese Weise lernt man gute Repräsentationen, die wiederverwendet werden können.
+
+> Vorhersage der Zukunft anhand der Vergangenheit.
+
+Die Vorhersage des nächsten Wortes ist ein gutes Beispiel für SSL: Das nächste Wort ist bereits in den Rohdaten vorhanden und kann als Grundlage für das Training eines neuronalen Netzes verwendet werden.
+
+Faltungsneuronale Netze (und rekurrente neuronale Netze) sind inzwischen durch die **Transformer**-Architektur [@Vaswani2017] ersetzt worden.
+
+Es handelt sich um ein reguläres neuronales Netz, das mit überwachtem Lernen trainiert wird, jedoch mit einer neuen Operation namens **Selbstbeobachtung**.
+
+Der ursprüngliche Transformer erlaubte es, Text auf autoregressive Weise (Wort für Wort) zu übersetzen.
+
+![Quelle: <http://jalammar.github.io/illustrated-transformer/>](img/transformer_decoding_2.gif)
+
+Der Hauptvorteil der Selbstaufmerksamkeitsoperation besteht darin, dass sie es ermöglicht, kontextabhängige Repräsentationen der Wörter unabhängig von der Länge des Satzes zu lernen:
+
+Mehrere Aufmerksamkeitsköpfe erlauben es, verschiedene Kontexte für jedes Wort zu lernen.
+
+Schlüsseleigenschaft: es wird möglich, das nächste Wort in kompletten Absätzen/Kapiteln vorherzusagen: die einzige Einschränkung ist die Rechenleistung!
+
+
+GPT-3 ist ein **Large Language Model** (LLM) von OpenAI, das darauf trainiert ist, das nächste Wort (eigentlich Token) aus einem riesigen Textkorpus vorherzusagen.
+
+45 TB an Text aus Wikipedia, Büchern, Common Crawl (Internet), Webtext2 (Reddit).
+
+Es handelt sich um einen Teil des Transformers (Decoders), der jedoch vergrößert wurde: 175B Parameter, 96 Schichten, 96 Aufmerksamkeitsköpfe, Vektoren der Größe 12288...
+
+GPT-3 wurde für die Vorhersage des nächsten Wortes in einer riesigen Datenbank trainiert. 
+
+Aufgrund seiner stochastischen Natur sind die produzierten Texte immer unterschiedlich: LLMs sind **stochastische Papageien** [@Bender2021].
+
+OpenAI hat vermutlich 34 Tage gebraucht, um GPT-3 auf 1024 A100-GPUs (10 k$ pro Stück, 5 M$ Stromverbrauch) zu trainieren. Es würde 355 Jahre dauern, GPT-3 auf einem einzigen V100-GPU zu trainieren.
+
+GPT-3 kann nur wiederholen, worauf es trainiert wurde. Es ist für nichts anderes geeignet, wie z. B. Gespräche, Fragenbeantwortung oder Softwareentwicklung, da es nicht in den Trainingsdaten enthalten ist.
+
+GPT-3 kann durch überwachtes Lernen mit **Eingabeaufforderungen** und erwarteten Ausgaben **feinabgestimmt** werden.
+
+Für ChatGPT wurde GPT-3 anhand von 13.000 Eingabe-/Ausgabebeispielen, die von 40 Experten geschrieben wurden, feinabgestimmt (GPT-3.5).
+
+
+In RL wird die richtige Antwort nicht vorgegeben. Eine skalare Belohnung signalisiert lediglich, wie gut die Ausgabe ist.
+
+Das Modell muss lernen, wie es die Belohnungen langfristig maximieren kann, indem es die beste Aktion (Ausgabe) in dem gegebenen Zustand (Eingabe) produziert.
+
+Mit der richtigen Verlustfunktion kann ein tiefes neuronales Netz durch **Versuch und Irrtum** so trainiert werden, dass die Belohnungen maximiert werden. 
+
+Es gibt viele Algorithmen: DQN, A3C, DDPG, PPO, PlaNet, Dreamer, MuZero...
+
+Das Hauptproblem ist das **Belohnungsmodell**: Wann ist die Ausgabe gut oder schlecht?
+
+AlphaGo [@Silver2016] konnte 2016 Lee Sedol, den 19-fachen Weltmeister, schlagen.
+
+Es stützt sich auf menschliches Wissen, um einen RL-Agenten zu **booten** (überwachtes Lernen).
+
+Der RL-Agent entdeckt neue Strategien, indem er sich selbst spielt: Während der Spiele gegen Lee Sedol war er in der Lage, **neuartige** Züge zu verwenden, die nie zuvor gespielt wurden, und überraschte seinen Gegner.
+
+Das Training dauerte mehrere Wochen auf 1202 CPUs und 176 GPUs.
+
+
+Ein Belohnungsmodell (RM) kann auf überwachte Weise trainiert werden, um die Punktzahl vorherzusagen, die menschliche Kommentatoren für eine vorgeschlagene Antwort vergeben würden.
+
+Die menschliche Kommentierung war sehr mühsam. Sie mussten nicht nur die Antworten bewerten, sondern auch NSFW-Inhalte melden, die von reddit zugespielt wurden.
+
+Mithilfe des Belohnungsmodells (PPO) kann GPT so fein abgestimmt werden, dass es nur gute Antworten produziert.
+
+ChatGPT kann nur Text produzieren, der in seinen Trainingsdaten (SSL bis 2021, SL oder RL) enthalten war, allerdings auf stochastische Weise.
+
+Seine Trainingsziele waren:
+
+1. SSL: Vorhersage des nächsten Wortes des Satzes.
+2. SL: Beantworte die Fragen.
+3. RL: Bitte die menschlichen Kommentatoren.
+
+Der RLHF-Anpassungsansatz und die Verwendung von versteckten Aufforderungen erklären das Verhalten des Chatbots: Freundlichkeit, politische Korrektheit, Zufriedenstellung des Benutzers.
+
+Die Wahrheit zu sagen war kein Ziel. ChatGPT lügt nicht, sondern sagt, was dem Benutzer gefällt:
+
+> ChatGPT: Automatischer teurer BS-Generator in großem Maßstab
+>
+> Colin Fraser

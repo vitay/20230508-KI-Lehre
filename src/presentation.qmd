@@ -10,7 +10,7 @@ footer: "Julien Vitay - Artificial Intelligence : ChatGPT - <https://julien-vita
 ---
 
 
-# Artficial Intelligence
+# Artificial Intelligence
 
 
 ::: {.columns}
@@ -36,9 +36,15 @@ footer: "Julien Vitay - Artificial Intelligence : ChatGPT - <https://julien-vita
 :::
 :::
 
-# ChatGPT = GPT-3.5 + RL with human feedback
+---
 
-![Source: <https://openai.com/blog/chatgpt>](img/ChatGPT_Diagram.svg)
+![Source: <https://data-science-blog.com/blog/2018/05/14/machine-learning-vs-deep-learning-wo-liegt-der-unterschied>](img/aimldl.png)
+
+---
+
+![Source: <http://www.isaziconsulting.co.za/machinelearning.html>](img/ml-areas.png)
+
+# 1 - Language modeling
 
 # Language models: hierarchical trees
 
@@ -73,7 +79,7 @@ footer: "Julien Vitay - Artificial Intelligence : ChatGPT - <https://julien-vita
 ::: {.columns}
 ::: {.column width=50%}
 
-* The second main approach to NLP is to split a corpus into **n-grams**, i.e. sequences of $n$ consecutive words, and compute conditional probabilities:
+* The second main approach to NLP is to split a corpus into **n-grams**, i.e. sequences of $n$ consecutive words, and compute conditional probabilities (Markov chain):
 
 $$P(x_n \, | \, x_{1}, \ldots, x_{n-1})$$
 
@@ -183,6 +189,7 @@ Source: <https://web.stanford.edu/~jurafsky/slp3/3.pdf>
 :::
 :::
 
+# 2 - Supervised learning
 
 # Supervised learning
 
@@ -278,6 +285,8 @@ Mask R-CNN [@He2018]
 :::
 :::
 
+# 3 - Self-supervised learning
+
 # Self-supervised learning
 
 
@@ -313,7 +322,7 @@ Mask R-CNN [@He2018]
 
 * It is a regular neural network trained using supervised learning, but with a new operation called **self-attention**.
 
-* The original Transformer allowed to translate text in an autoregressive manner (word by word).
+* The main advantage of the Transformer is that the texts can be very long, if you have the computational power!
 
 ![Source: <http://jalammar.github.io/illustrated-transformer/>](img/transformer_decoding_2.gif)
 
@@ -329,7 +338,9 @@ Mask R-CNN [@He2018]
 See <https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/notes/notes/7.1-Transformers.html>
 :::
 
-# Self-attention
+
+<!--
+# Self-attention 
 
 * The main advantage of the self-attention operation is that it allows to learn context-dependent representations of the words regardless the length of the sentence:
 
@@ -348,6 +359,9 @@ $$
 ::: footer
 See <https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/notes/notes/7.1-Transformers.html>
 :::
+-->
+
+#  4 - GPT-3 (Generative Pretrained Transformer)
 
 # GPT-3 (Generative Pretrained Transformer)
 
@@ -383,7 +397,9 @@ See <https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/notes/notes/7.1
 
 * GPT-3 has been trained to predict the next word on a huge database. 
 
-* Due to its stochastic nature, the produced texts are always different: LLMs are **stochastic parrots** [@Bender2021].
+* Due to its stochastic nature, the produced texts are always different: 
+
+    * LLMs are **stochastic parrots** [@Bender2021].
 
 * It presumably took OpenAI 34 days to train GPT-3 on 1024 A100 GPUs (10 k$ each, 5 M$ of electricity). It would take 355 years to train GPT-3 on a single V100 GPU.
 
@@ -408,6 +424,8 @@ See <https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/notes/notes/7.1
 
 ![Source: <https://openai.com/blog/chatgpt>](img/ChatGPT_Diagram.svg)
 
+# 5 - Reinforcement learning 
+
 # Reinforcement Learning (RL)
 
 * In RL, the correct answer is not provided. A scalar reward simply signals how good the output is.
@@ -427,7 +445,7 @@ See <https://www.tu-chemnitz.de/informatik/KI/edu/deeprl/notes/>
 
 * Many algorithms exist: DQN, A3C, DDPG, PPO, PlaNet, Dreamer, MuZero...
 
-* The main problem is the **reward model**: when is the output good or bad?
+* The only information used for learning is the **reward model**: is the output good or bad?
 
 ::: {}
 ![](img/deeprl.jpg){width=60% fig-align="center"}
@@ -467,6 +485,12 @@ A3C [@Mnih2016]
 
 * Training took several weeks on 1202 CPUs and 176 GPUs.
 
+# 6 - ChatGPT
+
+
+# ChatGPT = GPT-3.5 + RL with human feedback
+
+![Source: <https://openai.com/blog/chatgpt>](img/ChatGPT_Diagram.svg)
 
 # InstructGPT: Reinforcement Learning from Human Feedback (RLHF)
 
@@ -493,13 +517,15 @@ InstructGPT:  [@Ouyang2022]
 
 # Summary
 
-* ChatGPT can only produce text that was in its training data (SSL until 2021, SL or RL), although in a stochastic manner.
+* ChatGPT can only produce text that was in its training data, although in a stochastic manner.
+
+* The grammar and style is very impressive, due to the massive amount of data and the learning capacities of the huge  Transformer.
 
 * Its training objectives were:
 
     1. SSL: Predict the next word of the sentence.
     2. SL: Answer the questions.
-    3. RL: Please the human annotators.
+    3. RLHF: Please the human annotators.
 
 * The RLHF alignment approach and the use of hidden prompts explain the behavior of the chatbot: friendliness, political correctness, satisfying the user.
 
@@ -515,7 +541,9 @@ InstructGPT:  [@Ouyang2022]
 
 * A plugin allowing ChatGPT to access Internet was recently published. 
 
-# Bing ChatGPT is Sydney
+# Thanks
+
+# Bing's ChatGPT is called  Sydney
 
 * The behavior / personality of the chatbot is governed by a hidden prompt at the start of a conversation. 
 
@@ -525,7 +553,6 @@ InstructGPT:  [@Ouyang2022]
 ![](img/sydney2.jpg)
 
 :::
-
 
 
 # References

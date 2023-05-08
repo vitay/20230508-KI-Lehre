@@ -376,8 +376,9 @@ Dr.&nbsp;habil. Julien Vitay
 
   <p class="date">08.05.2023</p>
 </section>
-<section id="artficial-intelligence" class="title-slide slide level1 center">
-<h1>Artficial Intelligence</h1>
+<section>
+<section id="artificial-intelligence" class="title-slide slide level1 center">
+<h1>Artificial Intelligence</h1>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
@@ -395,11 +396,18 @@ Dr.&nbsp;habil. Julien Vitay
 </div>
 </div>
 </section>
+<section class="slide level2">
 
-<section id="chatgpt-gpt-3.5-rl-with-human-feedback" class="title-slide slide level1 center">
-<h1>ChatGPT = GPT-3.5 + RL with human feedback</h1>
 
-<img data-src="img/ChatGPT_Diagram.svg" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://openai.com/blog/chatgpt" class="uri">https://openai.com/blog/chatgpt</a></p></section>
+<img data-src="img/aimldl.png" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://data-science-blog.com/blog/2018/05/14/machine-learning-vs-deep-learning-wo-liegt-der-unterschied" class="uri">https://data-science-blog.com/blog/2018/05/14/machine-learning-vs-deep-learning-wo-liegt-der-unterschied</a></p></section>
+<section class="slide level2">
+
+
+<img data-src="img/ml-areas.png" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="http://www.isaziconsulting.co.za/machinelearning.html" class="uri">http://www.isaziconsulting.co.za/machinelearning.html</a></p></section></section>
+<section id="language-modeling" class="title-slide slide level1 center">
+<h1>1 - Language modeling</h1>
+
+</section>
 
 <section id="language-models-hierarchical-trees" class="title-slide slide level1 center">
 <h1>Language models: hierarchical trees</h1>
@@ -434,7 +442,7 @@ Dr.&nbsp;habil. Julien Vitay
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
-<li>The second main approach to NLP is to split a corpus into <strong>n-grams</strong>, i.e.&nbsp;sequences of <span class="math inline">n</span> consecutive words, and compute conditional probabilities:</li>
+<li>The second main approach to NLP is to split a corpus into <strong>n-grams</strong>, i.e.&nbsp;sequences of <span class="math inline">n</span> consecutive words, and compute conditional probabilities (Markov chain):</li>
 </ul>
 <p><span class="math display">P(x_n \, | \, x_{1}, \ldots, x_{n-1})</span></p>
 <ul>
@@ -536,6 +544,11 @@ Dr.&nbsp;habil. Julien Vitay
 </section>
 
 <section id="supervised-learning" class="title-slide slide level1 center">
+<h1>2 - Supervised learning</h1>
+
+</section>
+
+<section id="supervised-learning-1" class="title-slide slide level1 center">
 <h1>Supervised learning</h1>
 
 <img data-src="img/supervised.png/supervised.png.001.png" class="r-stretch"></section>
@@ -599,7 +612,7 @@ Dr.&nbsp;habil. Julien Vitay
 <p>Mask R-CNN <span class="citation" data-cites="He2018">(<a href="#/references" role="doc-biblioref" onclick="">He et al., 2018</a>)</span></p>
 </div>
 </section></section>
-<section id="supervised-learning-1" class="title-slide slide level1 center">
+<section id="supervised-learning-2" class="title-slide slide level1 center">
 <h1>Supervised learning</h1>
 <div class="columns">
 <div class="column" style="width:80%;">
@@ -628,6 +641,11 @@ Dr.&nbsp;habil. Julien Vitay
 </section>
 
 <section id="self-supervised-learning" class="title-slide slide level1 center">
+<h1>3 - Self-supervised learning</h1>
+
+</section>
+
+<section id="self-supervised-learning-1" class="title-slide slide level1 center">
 <h1>Self-supervised learning</h1>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -665,7 +683,7 @@ Dr.&nbsp;habil. Julien Vitay
 <ul>
 <li><p>Convolutional neural networks (and recurrent neural networks) have now been replaced by the <strong>Transformer</strong> architecture <span class="citation" data-cites="Vaswani2017">(<a href="#/references" role="doc-biblioref" onclick="">Vaswani et al., 2017</a>)</span>.</p></li>
 <li><p>It is a regular neural network trained using supervised learning, but with a new operation called <strong>self-attention</strong>.</p></li>
-<li><p>The original Transformer allowed to translate text in an autoregressive manner (word by word).</p></li>
+<li><p>The main advantage of the Transformer is that the texts can be very long, if you have the computational power!</p></li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -685,34 +703,33 @@ Dr.&nbsp;habil. Julien Vitay
 <div class="footer">
 <p>See <a href="https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/notes/notes/7.1-Transformers.html" class="uri">https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/notes/notes/7.1-Transformers.html</a></p>
 </div>
-</section>
+<!--
+# Self-attention 
 
-<section id="self-attention" class="title-slide slide level1 center">
-<h1>Self-attention</h1>
-<ul>
-<li>The main advantage of the self-attention operation is that it allows to learn context-dependent representations of the words regardless the length of the sentence:</li>
-</ul>
-<p><span class="math display">
-Z = \text{softmax}(\dfrac{Q \times K^T}{\sqrt{d_k}}) \times V
-</span></p>
-<ul>
-<li><p>Multiple attention heads allow to learn different contexts for each word.</p></li>
-<li><p>Key property: it becomes possible to predict the next word in complete paragraphs / chapters: the only limitation is the computational power!</p></li>
-</ul>
+* The main advantage of the self-attention operation is that it allows to learn context-dependent representations of the words regardless the length of the sentence:
 
-<img data-src="img/transformer-needforheads.png" style="width:70.0%" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html" class="uri">https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html</a></p><div class="footer">
-<p>See <a href="https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/notes/notes/7.1-Transformers.html" class="uri">https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/notes/notes/7.1-Transformers.html</a></p>
-</div>
+$$
+Z = \text{softmax}(\dfrac{Q \times K^T}{\sqrt{d_k}}) \times V 
+$$
+
+* Multiple attention heads allow to learn different contexts for each word.
+
+* Key property: it becomes possible to predict the next word in complete paragraphs / chapters: the only limitation is the computational power!
+
+
+![Source: <https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html>](img/transformer-needforheads.png){width=70%}
+
+
+::: footer
+See <https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/notes/notes/7.1-Transformers.html>
+:::
+-->
 </section>
 
 <section id="gpt-3-generative-pretrained-transformer" class="title-slide slide level1 center">
-<h1>GPT-3 (Generative Pretrained Transformer)</h1>
-<ul>
-<li><p>GPT-3 is a <strong>Large Language Model</strong> (LLM) from OpenAI, trained to predict the next word (actually token) from a huge text corpus.</p></li>
-<li><p>45 TB of text from Wikipedia, Books, Common Crawl (internet), Webtext2 (Reddit).</p></li>
-</ul>
+<h1>4 - GPT-3 (Generative Pretrained Transformer)</h1>
 
-<img data-src="img/gpt-training.webp" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://medium.com/nerd-for-tech/gpt3-and-chat-gpt-detailed-architecture-study-deep-nlp-horse-db3af9de8a5d" class="uri">https://medium.com/nerd-for-tech/gpt3-and-chat-gpt-detailed-architecture-study-deep-nlp-horse-db3af9de8a5d</a></p></section>
+</section>
 
 <section id="gpt-3-generative-pretrained-transformer-1" class="title-slide slide level1 center">
 <h1>GPT-3 (Generative Pretrained Transformer)</h1>
@@ -721,9 +738,18 @@ Z = \text{softmax}(\dfrac{Q \times K^T}{\sqrt{d_k}}) \times V
 <li><p>45 TB of text from Wikipedia, Books, Common Crawl (internet), Webtext2 (Reddit).</p></li>
 </ul>
 
-<img data-src="img/gpt-training.gif" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://medium.com/nerd-for-tech/gpt3-and-chat-gpt-detailed-architecture-study-deep-nlp-horse-db3af9de8a5d" class="uri">https://medium.com/nerd-for-tech/gpt3-and-chat-gpt-detailed-architecture-study-deep-nlp-horse-db3af9de8a5d</a></p></section>
+<img data-src="img/gpt-training.webp" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://medium.com/nerd-for-tech/gpt3-and-chat-gpt-detailed-architecture-study-deep-nlp-horse-db3af9de8a5d" class="uri">https://medium.com/nerd-for-tech/gpt3-and-chat-gpt-detailed-architecture-study-deep-nlp-horse-db3af9de8a5d</a></p></section>
 
 <section id="gpt-3-generative-pretrained-transformer-2" class="title-slide slide level1 center">
+<h1>GPT-3 (Generative Pretrained Transformer)</h1>
+<ul>
+<li><p>GPT-3 is a <strong>Large Language Model</strong> (LLM) from OpenAI, trained to predict the next word (actually token) from a huge text corpus.</p></li>
+<li><p>45 TB of text from Wikipedia, Books, Common Crawl (internet), Webtext2 (Reddit).</p></li>
+</ul>
+
+<img data-src="img/gpt-training.gif" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://medium.com/nerd-for-tech/gpt3-and-chat-gpt-detailed-architecture-study-deep-nlp-horse-db3af9de8a5d" class="uri">https://medium.com/nerd-for-tech/gpt3-and-chat-gpt-detailed-architecture-study-deep-nlp-horse-db3af9de8a5d</a></p></section>
+
+<section id="gpt-3-generative-pretrained-transformer-3" class="title-slide slide level1 center">
 <h1>GPT-3 (Generative Pretrained Transformer)</h1>
 <ul>
 <li><p>It is a subpart of the transformer (decoder), but scaled up:</p>
@@ -735,11 +761,14 @@ Z = \text{softmax}(\dfrac{Q \times K^T}{\sqrt{d_k}}) \times V
 
 <img data-src="img/transformer-decoder-intro.png" class="r-stretch quarto-figure-center"><p class="caption">Source: https://jalammar.github.io/illustrated-gpt2/</p></section>
 
-<section id="gpt-3-generative-pretrained-transformer-3" class="title-slide slide level1 center">
+<section id="gpt-3-generative-pretrained-transformer-4" class="title-slide slide level1 center">
 <h1>GPT-3 (Generative Pretrained Transformer)</h1>
 <ul>
 <li><p>GPT-3 has been trained to predict the next word on a huge database.</p></li>
-<li><p>Due to its stochastic nature, the produced texts are always different: LLMs are <strong>stochastic parrots</strong> <span class="citation" data-cites="Bender2021">(<a href="#/references" role="doc-biblioref" onclick="">Bender et al., 2021</a>)</span>.</p></li>
+<li><p>Due to its stochastic nature, the produced texts are always different:</p>
+<ul>
+<li>LLMs are <strong>stochastic parrots</strong> <span class="citation" data-cites="Bender2021">(<a href="#/references" role="doc-biblioref" onclick="">Bender et al., 2021</a>)</span>.</li>
+</ul></li>
 <li><p>It presumably took OpenAI 34 days to train GPT-3 on 1024 A100 GPUs (10 k$ each, 5 M$ of electricity). It would take 355 years to train GPT-3 on a single V100 GPU.</p></li>
 </ul>
 
@@ -760,10 +789,15 @@ Z = \text{softmax}(\dfrac{Q \times K^T}{\sqrt{d_k}}) \times V
 
 <img data-src="img/githubcopliot.gif" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://copilot.github.com/" class="uri">https://copilot.github.com/</a></p></section>
 
-<section id="chatgpt-gpt-3.5-rl-with-human-feedback-1" class="title-slide slide level1 center">
+<section id="chatgpt-gpt-3.5-rl-with-human-feedback" class="title-slide slide level1 center">
 <h1>ChatGPT = GPT-3.5 + RL with human feedback</h1>
 
 <img data-src="img/ChatGPT_Diagram.svg" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://openai.com/blog/chatgpt" class="uri">https://openai.com/blog/chatgpt</a></p></section>
+
+<section id="reinforcement-learning" class="title-slide slide level1 center">
+<h1>5 - Reinforcement learning</h1>
+
+</section>
 
 <section id="reinforcement-learning-rl" class="title-slide slide level1 center">
 <h1>Reinforcement Learning (RL)</h1>
@@ -783,7 +817,7 @@ Z = \text{softmax}(\dfrac{Q \times K^T}{\sqrt{d_k}}) \times V
 <ul>
 <li><p>Given the right loss function, a deep neural network can be trained by <strong>trial-and-error</strong> to maximize the rewards.</p></li>
 <li><p>Many algorithms exist: DQN, A3C, DDPG, PPO, PlaNet, Dreamer, MuZero…</p></li>
-<li><p>The main problem is the <strong>reward model</strong>: when is the output good or bad?</p></li>
+<li><p>The only information used for learning is the <strong>reward model</strong>: is the output good or bad?</p></li>
 </ul>
 <div>
 <div class="quarto-figure quarto-figure-center">
@@ -821,6 +855,16 @@ Z = \text{softmax}(\dfrac{Q \times K^T}{\sqrt{d_k}}) \times V
 </ul>
 </section>
 
+<section id="chatgpt" class="title-slide slide level1 center">
+<h1>6 - ChatGPT</h1>
+
+</section>
+
+<section id="chatgpt-gpt-3.5-rl-with-human-feedback-1" class="title-slide slide level1 center">
+<h1>ChatGPT = GPT-3.5 + RL with human feedback</h1>
+
+<img data-src="img/ChatGPT_Diagram.svg" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://openai.com/blog/chatgpt" class="uri">https://openai.com/blog/chatgpt</a></p></section>
+
 <section id="instructgpt-reinforcement-learning-from-human-feedback-rlhf" class="title-slide slide level1 center">
 <h1>InstructGPT: Reinforcement Learning from Human Feedback (RLHF)</h1>
 <ul>
@@ -851,12 +895,13 @@ Z = \text{softmax}(\dfrac{Q \times K^T}{\sqrt{d_k}}) \times V
 <section id="summary" class="title-slide slide level1 center">
 <h1>Summary</h1>
 <ul>
-<li><p>ChatGPT can only produce text that was in its training data (SSL until 2021, SL or RL), although in a stochastic manner.</p></li>
+<li><p>ChatGPT can only produce text that was in its training data, although in a stochastic manner.</p></li>
+<li><p>The grammar and style is very impressive, due to the massive amount of data and the learning capacities of the huge Transformer.</p></li>
 <li><p>Its training objectives were:</p>
 <ol type="1">
 <li>SSL: Predict the next word of the sentence.</li>
 <li>SL: Answer the questions.</li>
-<li>RL: Please the human annotators.</li>
+<li>RLHF: Please the human annotators.</li>
 </ol></li>
 <li><p>The RLHF alignment approach and the use of hidden prompts explain the behavior of the chatbot: friendliness, political correctness, satisfying the user.</p></li>
 <li><p>Telling the truth was not an objective. ChatGPT does not lie, but tells whatever will please the user:</p></li>
@@ -873,8 +918,13 @@ Z = \text{softmax}(\dfrac{Q \times K^T}{\sqrt{d_k}}) \times V
 </ul>
 </section>
 
-<section id="bing-chatgpt-is-sydney" class="title-slide slide level1 center">
-<h1>Bing ChatGPT is Sydney</h1>
+<section id="thanks" class="title-slide slide level1 center">
+<h1>Thanks</h1>
+
+</section>
+
+<section id="bings-chatgpt-is-called-sydney" class="title-slide slide level1 center">
+<h1>Bing’s ChatGPT is called Sydney</h1>
 <ul>
 <li>The behavior / personality of the chatbot is governed by a hidden prompt at the start of a conversation.</li>
 </ul>
