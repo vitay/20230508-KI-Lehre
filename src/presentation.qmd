@@ -369,7 +369,7 @@ See <https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/notes/notes/7.1
 
 # GPT-3 (Generative Pretrained Transformer)
 
-* It is a subpart of the transformer, but scaled up:
+* It is a subpart of the transformer (decoder), but scaled up:
 
     * 175B parameters, 96 layers, 96 attention heads, vectors of size 12288...
 
@@ -470,7 +470,7 @@ A3C [@Mnih2016]
 
 # InstructGPT: Reinforcement Learning from Human Feedback (RLHF)
 
-
+* A reward model (RM) can be trained in a supervised manner to predict the score that human annotators would give to a proposed response.
 
 ![Source: <https://huggingface.co/blog/rlhf>](img/reward-model.png)
 
@@ -487,8 +487,45 @@ InstructGPT:  [@Ouyang2022]
 
 # InstructGPT: Reinforcement Learning from Human Feedback (RLHF)
 
+* Using the reward model (PPO), GPT can be fine-tuned to only produce good answers.
+
 ![Source: <https://huggingface.co/blog/rlhf>](img/rlhf.png)
 
 # Summary
+
+* ChatGPT can only produce text that was in its training data (SSL until 2021, SL or RL), although in a stochastic manner.
+
+* Its training objectives were:
+
+    1. SSL: Predict the next word of the sentence.
+    2. SL: Answer the questions.
+    3. RL: Please the human annotators.
+
+* The RLHF alignment approach and the use of hidden prompts explain the behavior of the chatbot: friendliness, political correctness, satisfying the user.
+
+* Telling the truth was not an objective. ChatGPT does not lie, but tells whatever will please the user:
+
+> ChatGPT: Automatic expensive BS generator at scale
+>
+> Colin Fraser
+
+::: footer
+<https://medium.com/@colin.fraser/chatgpt-automatic-expensive-bs-at-scale-a113692b13d5>
+:::
+
+* A plugin allowing ChatGPT to access Internet was recently published. 
+
+# Bing ChatGPT is Sydney
+
+* The behavior / personality of the chatbot is governed by a hidden prompt at the start of a conversation. 
+
+::: {layout-ncol=2}
+![Source: <https://twitter.com/kliu128/status/1623472922374574080>](img/sydney1.jpg)
+
+![](img/sydney2.jpg)
+
+:::
+
+
 
 # References
